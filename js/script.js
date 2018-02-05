@@ -42,6 +42,8 @@ video.addEventListener('canplay', function(e){
     }
 }, false);
 
+
+// photo button event
 photoButton.addEventListener('click', function(e){
     takePicture();
 
@@ -49,6 +51,28 @@ photoButton.addEventListener('click', function(e){
 
 }, false);
 
+// filter event 
+photoFilter.addEventListener('change', function(e){
+    // set filter to chosen option
+    filter = e.target.value;
+    // set filter to video
+    video.style.filter = filter;
+    e.preventDefault();
+});
+
+// Clear event
+clearButton.addEventListener('click', function(e) {
+    // clear photos
+    photos.innerHTML = '';
+    // change filter back to normal 
+    filter = 'none';
+    // set video filter
+    video.style.filter = filter;
+    // reset selected list
+    photoFilter.selectedIndex = 0;
+});
+
+// Take picture from canvas
 function takePicture () {
     // Create canvas
     const context = canvas.getContext('2d');
@@ -59,7 +83,21 @@ function takePicture () {
         // draw an image of the video on the canvas
         context.drawImage(video, 0, 0, width, height);
 
+        // create an image from the canvas
+        const imgUrl = canvas.toDataURL('image/png');
+        console.log(imgUrl);
 
+        //create img element
+        const img = document.createElement('img');
+
+        // set img source
+        img.setAttribute('src', imgUrl);
+
+        // set image filter
+        img.style.filter = filter;
+
+        // add image to photos
+        photos.appendChild(img);
     }
 
 }
