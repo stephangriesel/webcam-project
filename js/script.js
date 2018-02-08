@@ -13,7 +13,7 @@ const photoButton = document.getElementById('photo-button');
 const clearButton = document.getElementById('clear-button');
 const photoFilter = document.getElementById('photo-filter');
 
-// Get media stream
+// Get media stream (display webcam in browser)
 navigator.mediaDevices.getUserMedia({video:true,audio: false}
 )
 .then(function(stream) {
